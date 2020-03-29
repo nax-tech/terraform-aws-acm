@@ -1,0 +1,15 @@
+.terraform
+
+env.*
+
+key*.json
+
+*.env
+*.tgz
+
+*.crt
+*.key
+
+*.pem
+
+.DS_Store
