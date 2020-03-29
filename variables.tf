@@ -16,7 +16,7 @@ variable "aws_account_id" {
 # ------------------------------------------------------------------------------
 variable "certificate_name" {
   description = "Name of the ACM certificate"
-  type        = "string"
+  type        = string
 }
 
 variable "domain_name" {
