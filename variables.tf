@@ -1,3 +1,19 @@
+# ------------------------------------------------------------------------------
+# MODULE PARAMETERS
+# These variables are expected to be passed in by the operator
+# ------------------------------------------------------------------------------
+
+variable "aws_region" {
+  description = "The AWS region in which all resources will be created"
+  type        = string
+}
+
+variable "aws_account_id" {
+  description = "The ID of the AWS Account in which to create resources."
+  type        = string
+}
+
+# ------------------------------------------------------------------------------
 variable "certificate_name" {
   description = "Name of the ACM certificate"
   type        = "string"
