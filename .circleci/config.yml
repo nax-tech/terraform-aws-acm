@@ -21,12 +21,12 @@ jobs:
       - run:
           name: Terraform fmt
           command: if [[ -n "$(terraform fmt -write=false)" ]]; then echo "Some terraform files need be formatted, run 'terraform fmt' to fix"; exit 1; fi
-      # - run:
-      #     name: Install tflint
-      #     command: wget -O /tmp/tflint.zip https://github.com/wata727/tflint/releases/download/v0.12.1/tflint_linux_amd64.zip && unzip /tmp/tflint.zip -d /usr/local/bin
-      # - run:
-      #     name: Check Terraform configurations with tflint
-      #     command: tflint
+      - run:
+          name: TFLint install
+          command: wget -O /tmp/tflint.zip https://github.com/wata727/tflint/releases/download/v0.12.1/tflint_linux_amd64.zip && unzip /tmp/tflint.zip -d /usr/local/bin
+      - run:
+          name: TFLint execute
+          command: tflint
       - persist_to_workspace:
           root: .
           paths: .
