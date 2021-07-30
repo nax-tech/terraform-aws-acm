@@ -24,8 +24,8 @@ variable "domain_name" {
   type        = string
 }
 
-variable "hosted_name" {
-  description = "AWS Route53 domain name entry, your exact domain name"
+variable "subject_alternative_names" {
+  description = "wildcard"
   type        = string
 }
 
