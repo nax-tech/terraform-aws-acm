@@ -28,8 +28,11 @@ terraform {
 
 resource "aws_acm_certificate" "certificate" {
   domain_name       = var.domain_name
-  validation_method = local.validation
+  validation_method = "DNS"
 
+  lifecycle {
+    create_before_destroy = true
+  }
   tags = {
     Name = "${var.certificate_name}"
   }
@@ -43,19 +46,19 @@ resource "aws_route53_record" "certificate_validation" {
   # ttl     = 60
 
   for_each = {
-    for dvo in aws_acm_certificate.certificate.domain_validation_options : dvo.domain_name => {
-      name   = dvo.resource_record_name
-      record = dvo.resource_record_value
-      type   = dvo.resource_record_type
+    for cert in aws_acm_certificate.certificate.domain_validation_options : cert.domain_name => {
+      name   = cert.resource_record_name
+      record = cert.resource_record_value
+      type   = cert.resource_record_type
     }
   }
 
-  allow_overwrite = true
   name            = each.value.name
   records         = [each.value.record]
   ttl             = 60
   type            = each.value.type
   zone_id         = data.aws_route53_zone.zone.id
+  allow_overwrite = true
 }
 
 # resource "aws_acm_certificate_validation" "certificate" {
